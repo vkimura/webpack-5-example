@@ -8,6 +8,8 @@ const HtmlWebpackExcludeTagsPlugin = require('./html-webpack-exclude-tags-plugin
 const HtmlWebpackExcludeAssetsPlugin = require('./html-webpack-exclude-assets-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
+const zlib = require('zlib');
 
 module.exports = {
   mode: 'production',
@@ -70,6 +72,22 @@ module.exports = {
       },
       // minimize: true,
       // debug: false,
+    }),
+    // new CompressionPlugin({
+    //   filename: '[path][base].gz',
+    //   algorithm: 'gzip',
+    //   test: /\.(js|css|html|svg)$/,
+    //   threshold: 10240,
+    //   minRatio: 0.8,
+    //   compressionOptions: { level: 9 },
+    // }),
+    new CompressionPlugin({
+      filename: '[path][base].br',
+      algorithm: 'brotliCompress',
+      test: /\.(js|css|html|svg)$/,
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ],
 };
