@@ -1,3 +1,4 @@
+// this is  a comment
 const titleBar = document.getElementById('title-bar');
 const draggable = document.getElementById('draggable');
 
